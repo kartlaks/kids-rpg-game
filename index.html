@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hero Maker</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="app">
+    <!-- Page 1 -->
+    <div id="page1" class="page active">
+      <h1>Hero Maker</h1>
+      <p class="subtitle">Create your adventure character!</p>
+
+      <div class="name-section">
+        <label for="charName">What is your hero's name?</label>
+        <input type="text" id="charName" placeholder="Enter your name..." maxlength="30" />
+      </div>
+
+      <h2>Choose your animal</h2>
+      <div class="card-grid" id="animalGrid">
+        <div class="card animal-card" data-animal="cat">
+          <div class="card-image">
+            <img src="images/animal-cat.png" alt="Cat" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+            <div class="placeholder-img" style="display:none">🐱</div>
+          </div>
+          <h3>Cat</h3>
+          <p class="trait">Clever and full of magic energy!</p>
+        </div>
+        <div class="card animal-card" data-animal="dog">
+          <div class="card-image">
+            <img src="images/animal-dog.png" alt="Dog" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+            <div class="placeholder-img" style="display:none">🐶</div>
+          </div>
+          <h3>Dog</h3>
+          <p class="trait">Loyal and incredibly brave!</p>
+        </div>
+        <div class="card animal-card" data-animal="squirrel">
+          <div class="card-image">
+            <img src="images/animal-squirrel.png" alt="Squirrel" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+            <div class="placeholder-img" style="display:none">🐿️</div>
+          </div>
+          <h3>Squirrel</h3>
+          <p class="trait">Lightning fast and super lucky!</p>
+        </div>
+        <div class="card animal-card" data-animal="elephant">
+          <div class="card-image">
+            <img src="images/animal-elephant.png" alt="Elephant" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+            <div class="placeholder-img" style="display:none">🐘</div>
+          </div>
+          <h3>Elephant</h3>
+          <p class="trait">Mighty strong and very wise!</p>
+        </div>
+      </div>
+
+      <button class="btn-primary" id="toPage2" disabled>Next: Choose Your Role →</button>
+    </div>
+
+    <!-- Page 2 -->
+    <div id="page2" class="page">
+      <h1>Choose Your Role</h1>
+      <p class="subtitle" id="page2Subtitle"></p>
+
+      <div class="card-grid" id="roleGrid">
+        <div class="card role-card" data-role="cleric">
+          <div class="card-image">
+            <img src="images/role-cleric.png" alt="Cleric" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+            <div class="placeholder-img" style="display:none">⚕️</div>
+          </div>
+          <h3>Cleric</h3>
+          <p class="trait">Healer and protector of the group</p>
+        </div>
+        <div class="card role-card" data-role="fighter">
+          <div class="card-image">
+            <img src="images/role-fighter.png" alt="Fighter" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+            <div class="placeholder-img" style="display:none">⚔️</div>
+          </div>
+          <h3>Fighter</h3>
+          <p class="trait">Bold warrior on the front lines</p>
+        </div>
+        <div class="card role-card" data-role="rogue">
+          <div class="card-image">
+            <img src="images/role-rogue.png" alt="Rogue" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+            <div class="placeholder-img" style="display:none">🗡️</div>
+          </div>
+          <h3>Rogue</h3>
+          <p class="trait">Sneaky and quick with a surprise</p>
+        </div>
+        <div class="card role-card" data-role="wizard">
+          <div class="card-image">
+            <img src="images/role-wizard.png" alt="Wizard" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+            <div class="placeholder-img" style="display:none">🧙</div>
+          </div>
+          <h3>Wizard</h3>
+          <p class="trait">Master of spells and arcane power</p>
+        </div>
+      </div>
+
+      <button class="btn-primary" id="toPage3" disabled>See My Character →</button>
+    </div>
+
+    <!-- Page 3 -->
+    <div id="page3" class="page">
+      <div class="character-sheet">
+        <h1 id="charTitle"></h1>
+
+        <div class="char-illustration">
+          <img id="charImage" src="" alt="Your character" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+          <div class="placeholder-img large" id="charImageFallback" style="display:none"></div>
+        </div>
+
+        <div class="char-descriptions">
+          <p id="animalDesc"></p>
+          <p id="roleDesc"></p>
+        </div>
+
+        <div class="stats-block">
+          <h2>Stats</h2>
+          <div id="statsList"></div>
+        </div>
+
+        <button class="btn-secondary" id="startOver">↩ Start Over</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>
