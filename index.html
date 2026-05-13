@@ -20,39 +20,81 @@
 
       <h2>Choose your animal</h2>
       <div class="card-grid" id="animalGrid">
-        <div class="card animal-card" data-animal="cat">
+        <div class="card animal-card" data-animal="dragonborn">
           <div class="card-image">
-            <img src="images/animal-cat.png" alt="Cat" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
-            <div class="placeholder-img" style="display:none">🐱</div>
+            <img src="images/animal-dragonborn.png" alt="Dragonborn" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+            <div class="placeholder-img" style="display:none">🐉</div>
           </div>
-          <h3>Cat</h3>
-          <p class="trait">Clever and full of magic energy!</p>
+          <h3>Dragonborn</h3>
+          <p class="trait">Powerful and full of dragon fire!</p>
         </div>
-        <div class="card animal-card" data-animal="dog">
+        <div class="card animal-card" data-animal="loxodon">
           <div class="card-image">
-            <img src="images/animal-dog.png" alt="Dog" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
-            <div class="placeholder-img" style="display:none">🐶</div>
-          </div>
-          <h3>Dog</h3>
-          <p class="trait">Loyal and incredibly brave!</p>
-        </div>
-        <div class="card animal-card" data-animal="squirrel">
-          <div class="card-image">
-            <img src="images/animal-squirrel.png" alt="Squirrel" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
-            <div class="placeholder-img" style="display:none">🐿️</div>
-          </div>
-          <h3>Squirrel</h3>
-          <p class="trait">Lightning fast and super lucky!</p>
-        </div>
-        <div class="card animal-card" data-animal="elephant">
-          <div class="card-image">
-            <img src="images/animal-elephant.png" alt="Elephant" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+            <img src="images/animal-loxodon.png" alt="Loxodon" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
             <div class="placeholder-img" style="display:none">🐘</div>
           </div>
-          <h3>Elephant</h3>
+          <h3>Loxodon</h3>
           <p class="trait">Mighty strong and very wise!</p>
         </div>
+        <div class="card animal-card" data-animal="centaur">
+          <div class="card-image">
+            <img src="images/animal-centaur.png" alt="Centaur" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+            <div class="placeholder-img" style="display:none">🐴</div>
+          </div>
+          <h3>Centaur</h3>
+          <p class="trait">Lightning fast and graceful!</p>
+        </div>
+        <div class="card animal-card" data-animal="owlin">
+          <div class="card-image">
+            <img src="images/animal-owlin.png" alt="Owlin" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+            <div class="placeholder-img" style="display:none">🦉</div>
+          </div>
+          <h3>Owlin</h3>
+          <p class="trait">Silent, sharp, and deeply wise!</p>
+        </div>
+        <div class="card animal-card" data-animal="harengon">
+          <div class="card-image">
+            <img src="images/animal-harengon.png" alt="Harengon" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+            <div class="placeholder-img" style="display:none">🐰</div>
+          </div>
+          <h3>Harengon</h3>
+          <p class="trait">Lucky and quick on their feet!</p>
+        </div>
+        <div class="card animal-card" data-animal="thrikreen">
+          <div class="card-image">
+            <img src="images/animal-thrikreen.png" alt="Thri-kreen" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+            <div class="placeholder-img" style="display:none">🐞</div>
+          </div>
+          <h3>Thri-kreen</h3>
+          <p class="trait">Scrappy and surprisingly lucky!</p>
+        </div>
+        <div class="card animal-card" data-animal="fairy">
+          <div class="card-image">
+            <img src="images/animal-fairy.png" alt="Fairy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+            <div class="placeholder-img" style="display:none">🧚</div>
+          </div>
+          <h3>Fairy</h3>
+          <p class="trait">Shimmering with pure magic!</p>
+        </div>
+        <div class="card animal-card" data-animal="unitaur">
+          <div class="card-image">
+            <img src="images/animal-unitaur.png" alt="Unitaur" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+            <div class="placeholder-img" style="display:none">🦄</div>
+          </div>
+          <h3>Unitaur</h3>
+          <p class="trait">Radiant magic from their horn!</p>
+        </div>
       </div>
+
+      <button class="btn-primary" id="toPage1b" disabled>Next: Choose Your Look →</button>
+    </div>
+
+    <!-- Page 1b: Appearance -->
+    <div id="page1b" class="page">
+      <h1>Choose Your Look</h1>
+      <p class="subtitle" id="page1bSubtitle"></p>
+
+      <div class="card-grid appearance-grid" id="appearanceGrid"></div>
 
       <button class="btn-primary" id="toPage2" disabled>Next: Choose Your Role →</button>
     </div>
