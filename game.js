@@ -1,27 +1,51 @@
 const ANIMALS = {
-  cat: {
-    name: "Cat",
-    emoji: "🐱",
-    description: "Cats have a mysterious connection to magic that few can explain.",
-    stats: { strength: 1, speed: 3, magic: 4, wisdom: 3, luck: 2 }
+  dragonborn: {
+    name: "Dragonborn",
+    emoji: "🐉",
+    description: "Dragonborn wield the raw power and arcane fire of their dragon ancestors.",
+    stats: { strength: 4, speed: 2, magic: 4, wisdom: 2, luck: 1 }
   },
-  dog: {
-    name: "Dog",
-    emoji: "🐶",
-    description: "Dogs are fearless companions who never back down from a fight.",
-    stats: { strength: 3, speed: 3, magic: 1, wisdom: 2, luck: 4 }
-  },
-  squirrel: {
-    name: "Squirrel",
-    emoji: "🐿️",
-    description: "Squirrels are blindingly fast and seem to find fortune everywhere.",
-    stats: { strength: 1, speed: 5, magic: 2, wisdom: 2, luck: 3 }
-  },
-  elephant: {
-    name: "Elephant",
+  loxodon: {
+    name: "Loxodon",
     emoji: "🐘",
-    description: "Elephants carry immense strength and ancient wisdom in equal measure.",
-    stats: { strength: 5, speed: 1, magic: 2, wisdom: 4, luck: 1 }
+    description: "Loxodons carry immense strength and ancient wisdom in equal measure.",
+    stats: { strength: 4, speed: 1, magic: 1, wisdom: 5, luck: 2 }
+  },
+  centaur: {
+    name: "Centaur",
+    emoji: "🐴",
+    description: "Centaurs gallop across the battlefield with unmatched speed and grace.",
+    stats: { strength: 3, speed: 5, magic: 1, wisdom: 2, luck: 2 }
+  },
+  owlin: {
+    name: "Owlin",
+    emoji: "🦉",
+    description: "Owlins see truths others miss, guided by deep and silent wisdom.",
+    stats: { strength: 1, speed: 2, magic: 3, wisdom: 5, luck: 2 }
+  },
+  harengon: {
+    name: "Harengon",
+    emoji: "🐰",
+    description: "Harengons bound through danger with uncanny luck and nimble feet.",
+    stats: { strength: 1, speed: 4, magic: 1, wisdom: 2, luck: 5 }
+  },
+  thrikreen: {
+    name: "Thri-kreen",
+    emoji: "🐞",
+    description: "Thri-kreen skitter through chaos, always landing on the lucky side.",
+    stats: { strength: 2, speed: 3, magic: 2, wisdom: 2, luck: 4 }
+  },
+  fairy: {
+    name: "Fairy",
+    emoji: "🧚",
+    description: "Fairies shimmer with pure magical energy drawn from the Feywild.",
+    stats: { strength: 1, speed: 3, magic: 5, wisdom: 3, luck: 1 }
+  },
+  unitaur: {
+    name: "Unitaur",
+    emoji: "🦄",
+    description: "Unitaurs channel radiant magic through their spiraling horn.",
+    stats: { strength: 2, speed: 2, magic: 5, wisdom: 3, luck: 1 }
   }
 };
 
@@ -57,6 +81,7 @@ const STAT_LABELS = { strength: "Strength", speed: "Speed", magic: "Magic", wisd
 const STAT_ICONS = { strength: "💪", speed: "⚡", magic: "✨", wisdom: "📖", luck: "🍀" };
 
 let selectedAnimal = null;
+let selectedAppearance = null;
 let selectedRole = null;
 let characterName = "";
 
@@ -69,7 +94,9 @@ function showPage(pageId) {
 function renderStars(value) {
   const max = 10;
   const filled = Math.min(value, max);
-  return "⭐".repeat(filled) + "☆".repeat(Math.max(0, max - filled));
+  const empty = Math.max(0, max - filled);
+  return '<span class="star filled">★</span>'.repeat(filled) +
+         '<span class="star empty">★</span>'.repeat(empty);
 }
 
 function buildCharacterSheet() {
@@ -81,7 +108,7 @@ function buildCharacterSheet() {
 
   const img = document.getElementById("charImage");
   const fallback = document.getElementById("charImageFallback");
-  img.src = `images/${selectedAnimal}-${selectedRole}.png`;
+  img.src = `images/${selectedAnimal}-appearance-${selectedAppearance}.png`;
   img.alt = `${animal.name} ${role.name}`;
   img.style.display = "";
   fallback.style.display = "none";
@@ -108,10 +135,10 @@ function buildCharacterSheet() {
 
 // Page 1 logic
 const charNameInput = document.getElementById("charName");
-const toPage2Btn = document.getElementById("toPage2");
+const toPage1bBtn = document.getElementById("toPage1b");
 
 function checkPage1Ready() {
-  toPage2Btn.disabled = !(characterName.trim().length > 0 && selectedAnimal !== null);
+  toPage1bBtn.disabled = !(characterName.trim().length > 0 && selectedAnimal !== null);
 }
 
 charNameInput.addEventListener("input", () => {
@@ -127,6 +154,44 @@ document.querySelectorAll(".animal-card").forEach(card => {
     checkPage1Ready();
   });
 });
+
+toPage1bBtn.addEventListener("click", () => {
+  const animal = ANIMALS[selectedAnimal];
+  document.getElementById("page1bSubtitle").textContent =
+    `Pick an appearance for your ${animal.name}`;
+  buildAppearancePage();
+  showPage("page1b");
+});
+
+// Page 1b: Appearance logic
+const toPage2Btn = document.getElementById("toPage2");
+
+function buildAppearancePage() {
+  selectedAppearance = null;
+  toPage2Btn.disabled = true;
+  const grid = document.getElementById("appearanceGrid");
+  grid.innerHTML = "";
+  const animal = ANIMALS[selectedAnimal];
+  for (let i = 1; i <= 3; i++) {
+    const card = document.createElement("div");
+    card.className = "card appearance-card";
+    card.dataset.appearance = i;
+    card.innerHTML = `
+      <div class="card-image">
+        <img src="images/${selectedAnimal}-appearance-${i}.png" alt="${animal.name} look ${i}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+        <div class="placeholder-img" style="display:none">${animal.emoji}</div>
+      </div>
+      <h3>Look ${i}</h3>
+    `;
+    card.addEventListener("click", () => {
+      grid.querySelectorAll(".appearance-card").forEach(c => c.classList.remove("selected"));
+      card.classList.add("selected");
+      selectedAppearance = i;
+      toPage2Btn.disabled = false;
+    });
+    grid.appendChild(card);
+  }
+}
 
 toPage2Btn.addEventListener("click", () => {
   document.getElementById("page2Subtitle").textContent =
@@ -154,10 +219,12 @@ toPage3Btn.addEventListener("click", () => {
 // Page 3 logic
 document.getElementById("startOver").addEventListener("click", () => {
   selectedAnimal = null;
+  selectedAppearance = null;
   selectedRole = null;
   characterName = "";
   charNameInput.value = "";
   document.querySelectorAll(".animal-card, .role-card").forEach(c => c.classList.remove("selected"));
+  toPage1bBtn.disabled = true;
   toPage2Btn.disabled = true;
   toPage3Btn.disabled = true;
   showPage("page1");
