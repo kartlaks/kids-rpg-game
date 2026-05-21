@@ -1,80 +1,87 @@
 const ANIMALS = {
-  dragonborn: {
-    name: "Dragonborn",
+  Dragon: {
+    name: "Dragon",
     emoji: "🐉",
-    description: "Dragonborn wield the raw power and arcane fire of their dragon ancestors.",
+    description: "Dragons wield raw power and arcane fire from their ancient lineage.",
     stats: { strength: 4, speed: 2, magic: 4, wisdom: 2, luck: 1 }
   },
-  loxodon: {
-    name: "Loxodon",
-    emoji: "🐘",
-    description: "Loxodons carry immense strength and ancient wisdom in equal measure.",
-    stats: { strength: 4, speed: 1, magic: 1, wisdom: 5, luck: 2 }
+  Deer: {
+    name: "Deer",
+    emoji: "🦌",
+    description: "Deer move with quiet grace and an instinct for unseen paths.",
+    stats: { strength: 2, speed: 5, magic: 2, wisdom: 3, luck: 1 }
   },
-  centaur: {
+  Centaur: {
     name: "Centaur",
     emoji: "🐴",
     description: "Centaurs gallop across the battlefield with unmatched speed and grace.",
     stats: { strength: 3, speed: 5, magic: 1, wisdom: 2, luck: 2 }
   },
-  owlin: {
-    name: "Owlin",
-    emoji: "🦉",
-    description: "Owlins see truths others miss, guided by deep and silent wisdom.",
-    stats: { strength: 1, speed: 2, magic: 3, wisdom: 5, luck: 2 }
+  Ladybug: {
+    name: "Ladybug",
+    emoji: "🐞",
+    description: "Ladybugs are tiny but tough, and they carry incredibly good fortune.",
+    stats: { strength: 2, speed: 3, magic: 2, wisdom: 2, luck: 4 }
   },
-  harengon: {
+  Harengon: {
     name: "Harengon",
     emoji: "🐰",
     description: "Harengons bound through danger with uncanny luck and nimble feet.",
     stats: { strength: 1, speed: 4, magic: 1, wisdom: 2, luck: 5 }
   },
-  thrikreen: {
-    name: "Thri-kreen",
-    emoji: "🐞",
-    description: "Thri-kreen skitter through chaos, always landing on the lucky side.",
-    stats: { strength: 2, speed: 3, magic: 2, wisdom: 2, luck: 4 }
-  },
-  fairy: {
+  Fairy: {
     name: "Fairy",
     emoji: "🧚",
     description: "Fairies shimmer with pure magical energy drawn from the Feywild.",
     stats: { strength: 1, speed: 3, magic: 5, wisdom: 3, luck: 1 }
   },
-  unitaur: {
-    name: "Unitaur",
-    emoji: "🦄",
-    description: "Unitaurs channel radiant magic through their spiraling horn.",
-    stats: { strength: 2, speed: 2, magic: 5, wisdom: 3, luck: 1 }
+  Owlin: {
+    name: "Owlin",
+    emoji: "🦉",
+    description: "Owlins see truths others miss, guided by deep and silent wisdom.",
+    stats: { strength: 1, speed: 2, magic: 3, wisdom: 5, luck: 2 }
+  },
+  Loxodon: {
+    name: "Loxodon",
+    emoji: "🐘",
+    description: "Loxodons carry immense strength and ancient wisdom in equal measure.",
+    stats: { strength: 4, speed: 1, magic: 1, wisdom: 5, luck: 2 }
   }
 };
 
 const ROLES = {
-  cleric: {
+  Cleric: {
     name: "Cleric",
     emoji: "⚕️",
+    trait: "Healer and protector of the group",
     description: "Clerics channel divine power to heal allies and smite evil.",
     stats: { strength: 2, speed: 1, magic: 3, wisdom: 4, luck: 2 }
   },
-  fighter: {
+  Fighter: {
     name: "Fighter",
     emoji: "⚔️",
+    trait: "Bold warrior on the front lines",
     description: "Fighters train every day to become unstoppable in battle.",
     stats: { strength: 5, speed: 2, magic: 0, wisdom: 1, luck: 1 }
   },
-  rogue: {
+  Rogue: {
     name: "Rogue",
     emoji: "🗡️",
+    trait: "Sneaky and quick with a surprise",
     description: "Rogues strike from the shadows with precision and cunning.",
     stats: { strength: 2, speed: 4, magic: 1, wisdom: 2, luck: 4 }
   },
-  wizard: {
+  Wizard: {
     name: "Wizard",
     emoji: "🧙",
+    trait: "Master of spells and arcane power",
     description: "Wizards bend the fabric of reality with ancient spells.",
     stats: { strength: 0, speed: 2, magic: 5, wisdom: 4, luck: 2 }
   }
 };
+
+const APPEARANCES = ["Pixar", "Comic", "Real"];
+const APPEARANCE_LABELS = { Pixar: "Pixar Style", Comic: "Comic Style", Real: "Realistic" };
 
 const STAT_NAMES = ["strength", "speed", "magic", "wisdom", "luck"];
 const STAT_LABELS = { strength: "Strength", speed: "Speed", magic: "Magic", wisdom: "Wisdom", luck: "Luck" };
@@ -108,7 +115,7 @@ function buildCharacterSheet() {
 
   const img = document.getElementById("charImage");
   const fallback = document.getElementById("charImageFallback");
-  img.src = `images/${selectedAnimal}-appearance-${selectedAppearance}.png`;
+  img.src = `images/${selectedAnimal}-${selectedAppearance}-${selectedRole}.png`;
   img.alt = `${animal.name} ${role.name}`;
   img.style.display = "";
   fallback.style.display = "none";
@@ -172,44 +179,63 @@ function buildAppearancePage() {
   const grid = document.getElementById("appearanceGrid");
   grid.innerHTML = "";
   const animal = ANIMALS[selectedAnimal];
-  for (let i = 1; i <= 3; i++) {
+  APPEARANCES.forEach(appearance => {
     const card = document.createElement("div");
     card.className = "card appearance-card";
-    card.dataset.appearance = i;
+    card.dataset.appearance = appearance;
     card.innerHTML = `
       <div class="card-image">
-        <img src="images/${selectedAnimal}-appearance-${i}.png" alt="${animal.name} look ${i}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+        <img src="images/${selectedAnimal}-${appearance}-Base.png" alt="${animal.name} ${appearance}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
         <div class="placeholder-img" style="display:none">${animal.emoji}</div>
       </div>
-      <h3>Look ${i}</h3>
+      <h3>${APPEARANCE_LABELS[appearance]}</h3>
     `;
     card.addEventListener("click", () => {
       grid.querySelectorAll(".appearance-card").forEach(c => c.classList.remove("selected"));
       card.classList.add("selected");
-      selectedAppearance = i;
+      selectedAppearance = appearance;
       toPage2Btn.disabled = false;
     });
     grid.appendChild(card);
-  }
+  });
 }
 
 toPage2Btn.addEventListener("click", () => {
   document.getElementById("page2Subtitle").textContent =
     `${characterName} the ${ANIMALS[selectedAnimal].name} — what will you become?`;
+  buildRolePage();
   showPage("page2");
 });
 
-// Page 2 logic
+// Page 2: Role logic
 const toPage3Btn = document.getElementById("toPage3");
 
-document.querySelectorAll(".role-card").forEach(card => {
-  card.addEventListener("click", () => {
-    document.querySelectorAll(".role-card").forEach(c => c.classList.remove("selected"));
-    card.classList.add("selected");
-    selectedRole = card.dataset.role;
-    toPage3Btn.disabled = false;
+function buildRolePage() {
+  selectedRole = null;
+  toPage3Btn.disabled = true;
+  const grid = document.getElementById("roleGrid");
+  grid.innerHTML = "";
+  Object.entries(ROLES).forEach(([roleKey, role]) => {
+    const card = document.createElement("div");
+    card.className = "card role-card";
+    card.dataset.role = roleKey;
+    card.innerHTML = `
+      <div class="card-image">
+        <img src="images/${selectedAnimal}-${selectedAppearance}-${roleKey}.png" alt="${role.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+        <div class="placeholder-img" style="display:none">${role.emoji}</div>
+      </div>
+      <h3>${role.name}</h3>
+      <p class="trait">${role.trait}</p>
+    `;
+    card.addEventListener("click", () => {
+      grid.querySelectorAll(".role-card").forEach(c => c.classList.remove("selected"));
+      card.classList.add("selected");
+      selectedRole = roleKey;
+      toPage3Btn.disabled = false;
+    });
+    grid.appendChild(card);
   });
-});
+}
 
 toPage3Btn.addEventListener("click", () => {
   buildCharacterSheet();
@@ -223,7 +249,7 @@ document.getElementById("startOver").addEventListener("click", () => {
   selectedRole = null;
   characterName = "";
   charNameInput.value = "";
-  document.querySelectorAll(".animal-card, .role-card").forEach(c => c.classList.remove("selected"));
+  document.querySelectorAll(".animal-card").forEach(c => c.classList.remove("selected"));
   toPage1bBtn.disabled = true;
   toPage2Btn.disabled = true;
   toPage3Btn.disabled = true;
